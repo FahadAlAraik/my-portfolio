@@ -1,0 +1,79 @@
+.about-me-section {
+    padding-top: 150px;
+    background-color:#F7ECDE;
+}
+
+
+@media only screen and (max-width:991px) {
+    .section-reverse-updown{
+        flex-direction: column;
+    }
+
+    .about-me-text {
+        margin-top:100px!important;
+    }
+    .about-me-section {
+        padding-top:50px;
+    }
+
+    .about-me-img {
+
+        height: 300px;
+        width:300px;
+
+    }
+
+    .about-me-sticker {
+        top: 35%!important;;
+    }
+
+}
+
+@media only screen and (max-width:600px) {
+    
+    .about-me-text-header{
+        font-size:3.75rem!important;
+    }
+    .about-me-text-subheader {
+        font-size:1.5rem!important;
+    }
+}
+
+.about-me-text-header {
+    font-size:4.3rem;
+    font-weight:bold;
+}
+
+.about-me-text-subheader {
+    font-size:2rem;
+    text-transform:uppercase; 
+    letter-spacing:3px;
+    font-weight:bold
+}
+
+.about-me-sticker {
+    position:absolute;
+    top:2%;
+    right:5%;
+    transform:rotate(5deg)
+}
+
+@media only screen and (max-width:1400px) {
+    .about-me-sticker {
+        top:15%;
+        right:3%;
+        width:148px;
+        height:148px;
+    }
+}
+
+@media only screen and (max-width:485px) {
+
+    .about-me-sticker {
+        top:30%!important;
+        left:2%;
+        width:94px;
+        height:94px;
+    }
+
+}
