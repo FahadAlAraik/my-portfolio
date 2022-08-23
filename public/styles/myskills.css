@@ -1,0 +1,160 @@
+
+
+
+.myskills-section {
+    padding-top:95px;
+    background-color:#E9DAC1;
+}
+
+.myskills-header h1 {
+    text-transform: uppercase;
+    margin-left:50px;
+    font-size: 4.3rem;
+
+}
+
+.skills-sticker-one {
+    position: absolute;
+    right:5%;
+    top:2.5%;
+
+}
+
+@media only screen and (max-width:991px) {
+    .skills-sticker-one {
+        width:158px;
+        height:158px;
+        top:4%;
+    }
+}
+
+@media only screen and (max-width:551px) {
+    .skills-sticker-one {
+        top:5%;
+        right:12%;
+    }
+}
+
+.skill-row {
+
+    padding:25px;
+    padding-bottom: 50px;
+
+
+}
+
+.skill-header {
+    font-size:4rem;
+    font-weight: bold;
+}
+
+.skill-image {
+    height: 200px;
+    width: 200px;
+}
+
+@media only screen and (max-width:691px)  {
+    
+    .skill-header{
+        font-size:2.1rem;
+    }
+
+    .skill-image {
+        height: 128px;
+        width: 128px;
+    }
+
+}
+
+
+.skill-item {
+
+    padding:30px 0px 50px 10px;
+    margin-right: 50px;
+
+
+}
+
+.card {
+    transition:0.5s;
+}
+
+.card:hover {
+    transform:scale(1.1);
+    
+}
+
+
+
+.skill-item-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding-top:20px;
+}
+
+
+
+/* Progress Bar */
+
+.outer-progress-bar {
+    height: 25px;
+    width:100%;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.inner-progress-bar {
+    height: 100%;
+    background-color: #F29393;
+    border-radius: 25px;
+    animation-name:progress ;
+    animation-duration: 5s ;
+    animation-fill-mode: backwards;
+    
+    
+}
+
+@keyframes progress {
+
+    0% {
+        width: 0%;
+    }
+
+
+}
+
+/* End of Progress Bar */
+
+/*Cards*/
+
+
+
+.card {
+    border-radius: 25px!important;
+    width:12rem!important;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2), 6px 6px 2px 6px rgba(0, 0, 0, 0.19);
+    border-color:transparent;
+    background-color: transparent;
+    border:1.5px solid black!important;
+}
+
+
+
+.card-title {
+    font-size:1.5rem;
+    padding-bottom: 50px;
+}
+
+@media only screen and (max-width:691px) {
+    .card {
+        width: 10rem!important;
+    }
+    .card-title {
+        font-size:0.5rem;
+    }
+}
+
+/*End of Cards*/
+
