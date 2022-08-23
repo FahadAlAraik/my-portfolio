@@ -14,7 +14,7 @@ html, body {
 /* Nav Bar*/
 
 .navbar-toggler-icon {
-  background-image: url("../images/navbar-toggler-icon.jpg")!important;
+  background-image: url("navbar-toggler-icon.jpg")!important;
 }
 
 .navbar-toggler {
