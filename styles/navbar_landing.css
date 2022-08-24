@@ -118,6 +118,15 @@ html, body {
 }
 
 
+@media only screen and (max-width:393px) {
+
+  .second-image-style {
+    right:8%!important;
+    top: 1010%!important;
+  }
+
+}
+
 
 
   /*End of First Section or Landing Page*/

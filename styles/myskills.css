@@ -46,6 +46,7 @@
 .skill-header {
     font-size:4rem;
     font-weight: bold;
+    margin-left:25px!important;
 }
 
 .skill-image {
@@ -56,12 +57,33 @@
 @media only screen and (max-width:691px)  {
     
     .skill-header{
-        font-size:2.1rem;
+        font-size:1.75rem;
+        font-weight: bold;
+        margin-left:0px!important;
+    }
+
+   
+
+}
+
+
+
+@media only screen and (max-width:401px)  {
+    
+    .skill-header{
+        font-size:1.65rem!important;
+        font-weight: bold!important;
+        margin-left:0px!important;
+    }
+
+    .skills-sticker-one {
+       top:6.5%!important;
+        
     }
 
     .skill-image {
-        height: 128px;
-        width: 128px;
+        width: 150px;
+        height: 150px;
     }
 
 }
@@ -143,9 +165,12 @@
 
 
 .card-title {
-    font-size:1.5rem;
+    font-size:1rem!important;
+    font-weight: bold!important;
     padding-bottom: 50px;
 }
+
+
 
 @media only screen and (max-width:691px) {
     .card {
