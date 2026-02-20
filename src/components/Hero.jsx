@@ -13,11 +13,10 @@ export default function Hero() {
     offset: ["start start", "end start"]
   })
 
-  // Apple-style transforms
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
+  // Apple-style transforms (no blur - expensive)
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.85])
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, -100])
-  const blur = useTransform(scrollYProgress, [0, 0.3], [0, 10])
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, -80])
 
   return (
     <section
@@ -41,7 +40,7 @@ export default function Hero() {
 
         {/* Content */}
         <motion.div
-          style={{ scale, opacity, y, filter: `blur(${blur}px)` }}
+          style={{ scale, opacity, y }}
           className="relative z-10 text-center px-4"
         >
           {/* Name */}

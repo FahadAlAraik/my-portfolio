@@ -1,18 +1,8 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ExternalLink, Github, Award, ArrowUpRight } from 'lucide-react'
 import { projects, education } from '../data/portfolio'
 
 export default function Projects() {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
-
-  const titleY = useTransform(scrollYProgress, [0, 0.15], [80, 0])
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
-
   const allProjects = [
     ...projects.filter(p => p.featured),
     ...education.projects.map(p => ({ ...p, isEducation: true }))
@@ -20,14 +10,16 @@ export default function Projects() {
 
   return (
     <section
-      ref={containerRef}
       id="projects"
       className="relative py-32 sm:py-40"
     >
       <div className="container-custom max-w-6xl mx-auto px-4">
         {/* Title */}
         <motion.div
-          style={{ y: titleY, opacity: titleOpacity }}
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="mb-20 text-center"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-theme-primary">
@@ -37,26 +29,17 @@ export default function Projects() {
           </h2>
         </motion.div>
 
-        {/* Projects grid with scroll animations */}
+        {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {allProjects.map((project, index) => {
-            const cardRef = useRef(null)
-            const { scrollYProgress: cardProgress } = useScroll({
-              target: cardRef,
-              offset: ["start end", "center center"]
-            })
-
-            const cardY = useTransform(cardProgress, [0, 1], [80, 0])
-            const cardOpacity = useTransform(cardProgress, [0, 0.5], [0, 1])
-            const cardScale = useTransform(cardProgress, [0, 1], [0.9, 1])
-
-            return (
-              <motion.div
-                key={project.title || project.name}
-                ref={cardRef}
-                style={{ y: cardY, opacity: cardOpacity, scale: cardScale }}
-                className="group"
-              >
+          {allProjects.map((project, index) => (
+            <motion.div
+              key={project.title || project.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group"
+            >
                 <div className="glass-card glow-border h-full p-6 sm:p-8 relative overflow-hidden transition-all duration-500">
                   {/* Hover gradient */}
                   <div
@@ -140,8 +123,7 @@ export default function Projects() {
                   </div>
                 </div>
               </motion.div>
-            )
-          })}
+          ))}
         </div>
 
         {/* GitHub link */}

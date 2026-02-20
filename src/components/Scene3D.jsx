@@ -2,11 +2,10 @@ import { useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
-function NeuralNetwork({ nodeCount = 120, connectionDistance = 2.8, mouse }) {
+function NeuralNetwork({ nodeCount = 70, connectionDistance = 2.8, mouse }) {
   const groupRef = useRef()
   const nodesRef = useRef()
   const glowRef = useRef()
-  const outerGlowRef = useRef()
   const linesRef = useRef()
 
   // Generate node positions in a sphere distribution
@@ -97,14 +96,10 @@ function NeuralNetwork({ nodeCount = 120, connectionDistance = 2.8, mouse }) {
       }
       nodesRef.current.geometry.attributes.position.needsUpdate = true
 
-      // Sync glow layers
+      // Sync glow layer
       if (glowRef.current) {
         glowRef.current.geometry.attributes.position.array.set(posArray)
         glowRef.current.geometry.attributes.position.needsUpdate = true
-      }
-      if (outerGlowRef.current) {
-        outerGlowRef.current.geometry.attributes.position.array.set(posArray)
-        outerGlowRef.current.geometry.attributes.position.needsUpdate = true
       }
     }
 
@@ -130,27 +125,7 @@ function NeuralNetwork({ nodeCount = 120, connectionDistance = 2.8, mouse }) {
 
   return (
     <group ref={groupRef}>
-      {/* Outer glow layer */}
-      <points ref={outerGlowRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={nodeCount}
-            array={positions.slice()}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <pointsMaterial
-          size={0.35}
-          color="#10b981"
-          sizeAttenuation
-          transparent
-          opacity={0.08}
-          depthWrite={false}
-        />
-      </points>
-
-      {/* Middle glow layer */}
+      {/* Glow layer */}
       <points ref={glowRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -165,7 +140,7 @@ function NeuralNetwork({ nodeCount = 120, connectionDistance = 2.8, mouse }) {
           color="#10b981"
           sizeAttenuation
           transparent
-          opacity={0.25}
+          opacity={0.2}
           depthWrite={false}
         />
       </points>
@@ -375,9 +350,9 @@ function Scene({ mouse }) {
       <pointLight position={[10, 10, 10]} intensity={0.8} color="#10b981" />
       <pointLight position={[-10, -10, -10]} intensity={0.5} color="#06b6d4" />
       <pointLight position={[0, 0, 8]} intensity={0.3} color="#22d3ee" />
-      <NeuralNetwork nodeCount={120} connectionDistance={2.5} mouse={mouse} />
-      <TravelingSignals count={35} mouse={mouse} />
-      <AmbientParticles count={60} />
+      <NeuralNetwork nodeCount={70} connectionDistance={2.5} mouse={mouse} />
+      <TravelingSignals count={8} mouse={mouse} />
+      <AmbientParticles count={30} />
     </>
   )
 }
@@ -397,8 +372,12 @@ export default function Scene3D() {
     >
       <Canvas
         camera={{ position: [0, 0, 12], fov: 50 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: 'high-performance'
+        }}
       >
         <Scene mouse={mouse} />
       </Canvas>

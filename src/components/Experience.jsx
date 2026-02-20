@@ -1,29 +1,23 @@
-import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Building2, ChevronRight, ChevronDown } from 'lucide-react'
 import { experience } from '../data/portfolio'
 
 export default function Experience() {
   const [expandedCards, setExpandedCards] = useState({})
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
-
-  const titleY = useTransform(scrollYProgress, [0, 0.2], [80, 0])
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1])
 
   return (
     <section
-      ref={containerRef}
       id="experience"
       className="relative py-32 sm:py-40"
     >
       <div className="container-custom max-w-5xl mx-auto px-4">
         {/* Title */}
         <motion.div
-          style={{ y: titleY, opacity: titleOpacity }}
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="mb-20 text-center"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-theme-primary">
@@ -33,25 +27,16 @@ export default function Experience() {
           </h2>
         </motion.div>
 
-        {/* Experience cards with scroll-linked animations */}
+        {/* Experience cards */}
         <div className="space-y-8">
-          {experience.map((exp, index) => {
-            const cardRef = useRef(null)
-            const { scrollYProgress: cardProgress } = useScroll({
-              target: cardRef,
-              offset: ["start end", "center center"]
-            })
-
-            const cardY = useTransform(cardProgress, [0, 1], [100, 0])
-            const cardOpacity = useTransform(cardProgress, [0, 0.5], [0, 1])
-            const cardScale = useTransform(cardProgress, [0, 1], [0.95, 1])
-
-            return (
-              <motion.div
-                key={exp.company}
-                ref={cardRef}
-                style={{ y: cardY, opacity: cardOpacity, scale: cardScale }}
-              >
+          {experience.map((exp, index) => (
+            <motion.div
+              key={exp.company}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
                 <div className="glass-card glow-border p-8 sm:p-10 relative overflow-hidden group">
                   {/* Gradient line */}
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-400 via-cyan-400 to-teal-400" />
@@ -116,9 +101,8 @@ export default function Experience() {
                     )}
                   </div>
                 </div>
-              </motion.div>
-            )
-          })}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

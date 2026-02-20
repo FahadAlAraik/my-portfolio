@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@700&display=swap');
+
+html, body {
+    
+  margin: 0px!important;
+    
+}
+
+.top-container {
+  background-color: #FCE2DB!important; 
+  height:1000px;
+  margin:0px!important;
+}
+/* Nav Bar*/
+
+.navbar-toggler-icon {
+  background-image: url("../images/navbar-toggler-icon.jpg")!important;
+}
+
+.navbar-toggler {
+  border: 1px solid white!important;
+}
+
+#navbar-item {
+    margin:0 1em 0 1em;
+    font-family: 'Poppins';
+    font-size: 1.30rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color:#FEF9EF
+    
+
+}
+
+
+  
+
+
+/* لمن تصغر الشاشة */
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: darkgray;
+    height: 2px;
+  }
+  .nav-link:hover::after {
+    width: 90%;
+  }
+
+  .nav-link::after {
+    transition: all 0.5s;
+  }
+
+.first-image-style {
+  position:absolute; 
+  top:350%; 
+  left:10%;
+  transform:rotate(-45deg);
+  }
+
+.second-image-style {
+  position:absolute; 
+  top:900%; 
+  right:5%;
+  transform:rotate(135deg);
+  }
+
+  /* First Section or Landing Page */
+
+  @media only screen and (max-width:991px) {
+  
+    .section-one{
+      margin-top:125px!important;
+    }
+
+    .section-reverse {
+      flex-direction: column-reverse!important;
+    }
+
+    .landing-page-text {
+      font-size:3rem!important;
+      margin-top:70px!important;
+    }
+
+    .first-image-style {
+      top:100%!important;
+      left:5%!important;
+    }
+
+    .second-image-style {
+      top:1005%!important;
+    }
+
+    .top-container {
+      height: 900px;
+    }
+  
+  }
+
+.section-one {
+  margin-top:325px;
+
+}
+
+.landing-page-text {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+
+
+
+  /*End of First Section or Landing Page*/
