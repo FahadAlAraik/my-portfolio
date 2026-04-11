@@ -4,33 +4,24 @@
 
 @layer base {
   :root {
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #1a1a1a;
-    --bg-tertiary: #2a2a2a;
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.8);
-    --text-muted: rgba(255, 255, 255, 0.6);
-    --text-subtle: rgba(255, 255, 255, 0.4);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --node-color: rgba(16, 185, 129, 0.4);
-    --line-color: rgba(6, 182, 212, 0.15);
-  }
+    --bg-deep: #1a1a2e;
+    --bg-primary: #16213e;
+    --bg-secondary: #0f3460;
+    --bg-surface: #1e1e3a;
 
-  .light {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --text-subtle: #94a3b8;
-    --border-color: rgba(0, 0, 0, 0.1);
-    --glass-bg: rgba(255, 255, 255, 0.8);
-    --glass-border: rgba(0, 0, 0, 0.1);
-    --node-color: rgba(16, 185, 129, 0.5);
-    --line-color: rgba(6, 182, 212, 0.2);
+    --syn-green: #a6e22e;
+    --syn-purple: #ae81ff;
+    --syn-orange: #fd971f;
+    --syn-pink: #f92672;
+    --syn-yellow: #e6db74;
+    --syn-cyan: #66d9ef;
+    --syn-white: #f8f8f2;
+    --syn-grey: #75715e;
+    --syn-dim: #49483e;
+
+    --glass-bg: rgba(22, 33, 62, 0.55);
+    --glass-border: rgba(166, 226, 46, 0.12);
+    --glass-highlight: rgba(166, 226, 46, 0.06);
   }
 
   html {
@@ -38,57 +29,70 @@
   }
 
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--bg-deep);
+    color: var(--syn-white);
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    @apply bg-primary-500/30;
-    color: var(--text-primary);
+    background: rgba(166, 226, 46, 0.3);
+    color: var(--syn-white);
   }
 
-  /* Custom scrollbar */
+  /* Scrollbar — IDE style */
   ::-webkit-scrollbar {
     width: 8px;
   }
-
   ::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
+    background: var(--bg-deep);
   }
-
   ::-webkit-scrollbar-thumb {
-    background: var(--bg-tertiary);
+    background: var(--syn-dim);
     border-radius: 9999px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-subtle);
+    background: var(--syn-grey);
   }
 }
 
 @layer components {
+  /* ─── Syntax-colored gradient text ─── */
   .gradient-text {
-    @apply bg-gradient-to-r from-emerald-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--syn-green), var(--syn-cyan));
   }
 
+  .gradient-text-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--syn-orange), var(--syn-pink));
+  }
+
+  .gradient-text-cool {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--syn-purple), var(--syn-cyan));
+  }
+
+  /* ─── Glassmorphism: frosted code-editor panes ─── */
   .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
   }
 
   .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     position: relative;
     overflow: hidden;
   }
 
+  /* Top-edge glow on hover */
   .glass-card::before {
     content: '';
     position: absolute;
@@ -96,52 +100,27 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--node-color), transparent);
+    background: linear-gradient(90deg, transparent, var(--syn-green), transparent);
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
   }
-
   .glass-card:hover::before {
     opacity: 1;
   }
 
-  .light .glass-card {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  }
-
-  .glow-box {
-    box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
-  }
-
-  /* Neural network node decoration */
-  .neural-node {
-    width: 4px;
-    height: 4px;
-    background: var(--node-color);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--node-color), 0 0 20px var(--node-color);
-  }
-
-  /* Animated connection line */
-  .neural-line {
-    background: linear-gradient(90deg, transparent, var(--line-color), transparent);
-    height: 1px;
-  }
-
-  /* Glowing border effect */
+  /* Glow border on hover */
   .glow-border {
     position: relative;
   }
-
   .glow-border::after {
     content: '';
     position: absolute;
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), transparent, rgba(6, 182, 212, 0.3));
+    background: linear-gradient(135deg, rgba(166,226,46,0.3), transparent, rgba(102,217,239,0.3));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -151,50 +130,93 @@
     pointer-events: none;
     z-index: 0;
   }
-
   .glow-border:hover::after {
     opacity: 1;
   }
 
+  /* ─── Syntax tag labels ─── */
+  .syntax-tag {
+    @apply font-mono text-xs px-2 py-0.5 rounded;
+    color: var(--syn-cyan);
+    background: rgba(102, 217, 239, 0.1);
+    border: 1px solid rgba(102, 217, 239, 0.15);
+  }
+
+  .syntax-tag-green {
+    color: var(--syn-green);
+    background: rgba(166, 226, 46, 0.1);
+    border-color: rgba(166, 226, 46, 0.15);
+  }
+
+  .syntax-tag-purple {
+    color: var(--syn-purple);
+    background: rgba(174, 129, 255, 0.1);
+    border-color: rgba(174, 129, 255, 0.15);
+  }
+
+  .syntax-tag-orange {
+    color: var(--syn-orange);
+    background: rgba(253, 151, 31, 0.1);
+    border-color: rgba(253, 151, 31, 0.15);
+  }
+
+  .syntax-tag-pink {
+    color: var(--syn-pink);
+    background: rgba(249, 38, 114, 0.1);
+    border-color: rgba(249, 38, 114, 0.15);
+  }
+
+  /* ─── Terminal styles ─── */
+  .terminal {
+    @apply font-mono text-sm rounded-lg overflow-hidden;
+    background: rgba(10, 10, 20, 0.9);
+    border: 1px solid var(--syn-dim);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .terminal-header {
+    @apply flex items-center gap-2 px-4 py-2.5;
+    background: rgba(30, 30, 50, 0.8);
+    border-bottom: 1px solid var(--syn-dim);
+  }
+
+  .terminal-dot {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  /* ─── Section padding & layout ─── */
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32;
+    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto;
   }
 
-  /* Theme-aware text colors */
-  .text-theme-primary {
-    color: var(--text-primary);
+  /* ─── Code line number gutter ─── */
+  .line-number {
+    @apply select-none text-right pr-4 font-mono;
+    color: var(--syn-dim);
+    min-width: 2.5rem;
   }
 
-  .text-theme-secondary {
-    color: var(--text-secondary);
+  /* ─── Git branch line ─── */
+  .git-branch-line {
+    width: 3px;
+    background: linear-gradient(180deg, var(--syn-green), var(--syn-cyan));
+    border-radius: 9999px;
   }
 
-  .text-theme-muted {
-    color: var(--text-muted);
+  .git-commit-dot {
+    @apply w-4 h-4 rounded-full border-2 flex-shrink-0;
+    border-color: var(--syn-green);
+    background: var(--bg-deep);
+    box-shadow: 0 0 8px rgba(166, 226, 46, 0.4);
   }
 
-  .text-theme-subtle {
-    color: var(--text-subtle);
-  }
-
-  .bg-theme-primary {
-    background-color: var(--bg-primary);
-  }
-
-  .bg-theme-secondary {
-    background-color: var(--bg-secondary);
-  }
-
-  .bg-theme-tertiary {
-    background-color: var(--bg-tertiary);
-  }
-
-  .border-theme {
-    border-color: var(--border-color);
+  .git-commit-dot-active {
+    background: var(--syn-green);
+    box-shadow: 0 0 12px rgba(166, 226, 46, 0.6);
   }
 }
 
